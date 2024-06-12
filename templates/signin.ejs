@@ -1,0 +1,57 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/login.css" />
+  </head>
+  <body>
+    
+    <div class="container">
+      <img
+        src="https://vierp-test.s3.ap-south-1.amazonaws.com/logo/vit_logo_new.png"
+        alt="VIIT Logo"
+        style="max-width: 100px; max-height: 100px; margin-bottom: 20px;"
+      />
+      <h2><span class="text-sign">Sign</span><span
+          class="text-in"
+        >-In</span></h2>
+      <form action="/signin" method="post">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="button-container">
+          <input type="submit" value="SIGN IN" />
+          <button
+            type="button"
+            onclick="singupFun()"
+          >SIGN UP</button>
+        </div>
+      </form>
+      
+    </div>
+
+  </body>
+  <script>
+    function singupFun() {
+      window.location.href = "/signup";
+    };
+  </script>
+</html>

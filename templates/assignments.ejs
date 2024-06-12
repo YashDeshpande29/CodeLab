@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments</title>
+    <link rel="stylesheet" href="/assignments.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="/lib/codemirror.css">
+    <script src="/lib/codemirror.js"></script>
+    <script src="/mode/clike/clike.js"></script>
+    <link rel="stylesheet" href="/theme/dracula.css">
+    <script src="/addon/edit/closebrackets.js"></script>
+    <link rel="stylesheet" href="/theme/material-darker.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="question-card">
+                <h4 class="que m-2 p-2" id="que">
+                    <%= data.que %>
+                </h4>
+            </div>
+            <div class="input-output-card mt-2 bg-dark">
+                <label for="input" class="text-light mt-4 mb-2">Input</label>
+                <textarea id="input" class="form-control  " rows="3" "></textarea>
+                <label for="output" class="text-light mt-4 mb-2">Output</label>
+                <textarea id="output" class="form-control " rows="3"></textarea>
+            </div>
+        </div>
+
+        <div class="right">
+            <div>
+                <div class="p-2 bg-dark ">
+                    <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+                    <select class="form-select" id="inlineFormSelectPref">
+                        <option selected>Choose...</option>
+                        <option value="Java">Java</option>
+                        <option value="C++">C++</option>
+                        <option value="Python">Python</option>
+                    </select>
+                </div>
+                <div class="mt-0 mb-2 rounded ">
+                    <textarea id="editor" class="form-control"></textarea>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-end mb-2">
+                    <button type="button" id="run" class="btn btn-success ms-4 me-4 "><i
+                            class="bi bi-play-fill"></i> Run</button>
+                    <button type="submit" id="submit" class="btn btn-success ms-4 me-4">Submit</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div style="visibility: hidden">
+        <div id="user"><%=data.username%></div>
+        <div id="subject"><%=data.subject%></div>
+        <div id="id"><%=data.id%></div>
+    </div>
+    
+    <script>
+        
+        let editor = CodeMirror.fromTextArea(document.getElementById("editor") , {
+            mode: "text/x-c++src",
+            theme: "material-darker",
+            lineNumbers: true,
+            autoCloseBrackets: true
+        });
+        let username = '<%=data.username%>'
+        let subject = '<%=data.subject%>'
+        let id = '<%=data.id%>'
+        let que = document.getElementById("que");
+        let input = document.getElementById("input");
+        let output = document.getElementById("output");
+        let run = document.getElementById("run");
+        let submit = document.getElementById("submit");
+        let option = document.getElementById("inlineFormSelectPref");
+
+        editor.setSize(null, "75vh");
+
+        option.addEventListener("change", function () {
+            if (option.value == "Java") {   
+                editor.setValue(`public class Main {\n\tpublic static void main(String[] args) {\n\t\t// Your code here\n\t System.out.println("Hello World");\n\t}\n}`);
+                editor.setOption("mode", "text/x-java");
+            } else if (option.value == "Python") {
+                editor.setValue(`# Your code here\nprint("Hello World")`);
+                editor.setOption("mode", "text/x-python");
+            } else if (option.value == "C++") {
+                editor.setValue(`#include <iostream>\nusing namespace std;\n\nint main() {\n\t// Your code here\n\tcout<<"Hello World";\n\treturn 0;\n}`);
+                editor.setOption("mode", "text/x-c++src");
+            }else{
+                editor.setValue("Choose a language to start coding...");
+            }
+        });
+
+        run.addEventListener("click", async function () {
+            if(option.value == "Choose..."){
+                window.alert("Please select a language");
+            }
+            code = {
+                code: editor.getValue(),
+                input: input.value,
+                lang: option.value
+            };
+            console.log(code);
+            let oData = await fetch("http://localhost:4000/compile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(code)
+            });
+            let d = await oData.json();
+            output.value = d.output;
+        
+        });
+        
+        submit.addEventListener("click", async function () {
+            if(option.value == "Choose..."){
+                window.alert("Please select a language");
+                return;
+            }
+            if(output.value == ""){
+                window.alert("Please run the code before submitting");
+                return;
+            }
+            let data = {
+                'username': username,
+                'subject': subject,
+                'question': que.innerText,
+                'id': id,
+                'code': editor.getValue(),
+                <!-- input: input.value,  -->
+                'output': output.value,
+            };
+            
+            fetch("http://localhost:4000/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data),
+            }).then((res) => {
+                if (res.status == 200) {
+                    window.alert("Submitted successfully");
+                } else {
+                    window.alert("Submission failed");
+                }
+            });
+
+            
+        });
+        
+        
+    </script>
+</body>
+
+</html>

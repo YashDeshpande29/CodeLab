@@ -1,0 +1,96 @@
+.title {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-evenly;
+    align-items: center; /* Align items vertically */
+    background-color: #007bff; /* Add background color */
+    color: #fff; /* Set text color */
+    padding: 20px; /* Add padding */
+    border-radius: 8px; /* Add border radius */
+    font-size: 24px; /* Increase font size */
+    font-weight: bold; /* Set font weight */
+    text-transform: uppercase; /* Convert text to uppercase */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    margin-bottom: 20px; /* Add space between title and cards */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px; /* Add padding to use the whole screen */
+    margin-top: 50px;
+    margin-bottom: 50px; /* Add space at the end */
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next row */
+    gap: 20px; /* Add space between cards */
+}
+
+.card {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-basis: calc(33.33% - 20px); /* Set flex-basis to make each card take up 33.33% of the container width minus gap */
+    max-width: calc(33.33% - 20px); /* Set max-width to prevent cards from expanding beyond one-third of the container width */
+}
+
+.card h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.solve-btn,
+.view-btn {
+    flex-grow: 1;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.solve-btn {
+    background-color: #007bff;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.solve-btn a {
+    color: #fff;
+}
+
+.solve-btn:hover {
+    background-color: #0056b3;
+}
+
+.view-btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.view-btn a {
+    color: #fff;
+}
+
+.view-btn:hover {
+    background-color: #218838;
+}
+
+.submission-form {
+    display: none; /* Hide the form by default */
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

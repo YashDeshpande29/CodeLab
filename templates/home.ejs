@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   <link rel="stylesheet" href="/home.css">
+  
+  </head>
+  <body>
+      
+    <center><h2>Welcome <%= username %></h2></center>
+    
+            <div class="container">
+                <style>
+                    
+                </style>
+                <div class="card">
+                    <img src="/dsaimage.jpeg" alt="">
+                    <h2>ADS</h2>
+                    
+                    <button>
+                        <a href="/<%=username%>/ADS"> Start Learning</a>
+                    </button>
+                </div>
+                <div class="card">
+                    <img src="/dbmsimage.jpeg" alt="" id="dbms">
+                    <h2>DBMS</h2>
+                    <button>
+                        <a href="/<%=username%>/DBMS"> Start Learning</a>
+                    </button>
+                </div>
+                <div class="card">
+                    <img src="/osiamge.jpg" alt="" id="os">
+                    <h2>OS</h2>
+                    <button>
+                        <a href="/<%=username%>/OS"> Start Learning</a>
+                    </button>
+                </div>
+                <div class="card">
+                    <img src="/pythonimage.jpeg" alt="" id="python">
+                    <h2>ITW</h2>
+                    <button>
+                        <a href="/<%=username%>/python"> Start Learning</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <style>
+           
+.container {
+    margin-top: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1 0 5%; /* Ensures equal card width on most screens */
+}
+#dbms{
+    height: 200.78px;
+}
+#os{
+    height: 200.78px;
+}
+#python{
+    height:200.78px
+}
+
+
+.card h2 {
+    margin-bottom: 15px;
+}
+
+.card button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card button:hover {
+    background-color: #0069d9;
+}
+a{
+    color: #fff;
+}
+
+
+
+
+  
+
+  
+ 
+
+        </style>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+
+

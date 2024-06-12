@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment No. <%=id%></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #000;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .title h2 {
+            color: #333;
+        }
+        h2, h3 {
+            color: #555;
+        }
+        pre {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h2>Welcome <%= username %></h2>
+            <h2>Subject: <%= subject %></h2>
+        </div>
+        <h2>Assignment No. <%= id %>: <%= question %></h2>
+        <h3>Code:</h3>
+        <pre><%= code %></pre>
+        <!-- <h3>Input:</h3>
+        <pre></pre> -->
+        <h3>Output:</h3>
+        <pre><%= output %></pre>
+    </div>
+</body>
+</html>
